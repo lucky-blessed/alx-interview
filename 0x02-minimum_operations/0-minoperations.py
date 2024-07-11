@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+Minimum Operation Module
+"""
+
+
 def minOperations(n):
     """
     To calculate the fewest number of operations needed to result in
