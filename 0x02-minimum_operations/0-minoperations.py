@@ -21,8 +21,8 @@ def minOperations(n):
     while current_length < n:
         if n % current_length == 0:
             clipboard = current_length
-            operations += 1 # Copy All
+            operations += 1
         current_length += clipboard
-        operations += 1 # Paste
+        operations += 1
 
     return operations
