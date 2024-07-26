@@ -6,6 +6,7 @@ Log parsing script
 
 import sys
 
+
 def print_stats(total_size, status_counts):
     """
     Print matrics accumulation
@@ -14,6 +15,7 @@ def print_stats(total_size, status_counts):
     for ststus in sorted(status_counts.keys()):
         if status_counts[status] > 0:
             print("{}: {}".format(status, status_counts[status]))
+
 
 total_size = 0
 status_counts = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
@@ -41,5 +43,3 @@ except KeyboardInterrupt:
     raise
 
 print_stats(total_size, status_counts)
-
-
