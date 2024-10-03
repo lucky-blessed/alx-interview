@@ -5,10 +5,11 @@ the minimum number of coins needed to make a
 given amount of change
 
 Concepts:
-	- Greedy Algorithm
-	- Dynamic programming
-	- Algorithic complecity
+    - Greedy Algorithm
+    - Dynamic programming
+    - Algorithic complecity
 """
+
 
 def makeChange(coins, total):
     """
@@ -17,7 +18,7 @@ def makeChange(coins, total):
 
     Args:
         coins (list of in): A list of the of the value of cons
-        in your possession where each vaue us an integer 
+        in your possession where each vaue us an integer
         greater than zero (0).
         total (int): The total amount to achieve with the
         fewest number of coins.
