@@ -1,54 +1,54 @@
 #!/usr/bin/python3
-"""Prime Game"""
+"""
+Prime Game
+"""
 
 
 def sieve_of_eratosthenes(n):
     """
-    Generate a list of prime up to n using the sieve of
-    erastosthenes
+    Returns a list of prime up to n using the sieve
+    of Eratosthenes.
     """
-    sieve = [True] * (n + 1)
-    sieve[0] = sieve[1] = False
+    primes = [True] * (n + 1)
+    primes[0] = primes[1] = False
     for i in range(2, int(n ** 0.5) + 1):
-        if sieve[i]:
+        if primes[i]:
             for j in range(i * i, n + 1, i):
-                sieve[j] = False
-    return sieve
-
-
-def prime_counts(n, sieve):
-    """
-    Calculate the number of primes up to n
-    """
-    return sum(sieve[:n + 1])
+                primes[j] = False
+    return primes
 
 
 def isWinner(x, nums):
-    """etermine the winner of each rounds"""
-    if not nums or x < 1:
+    """
+    Determines the winner of the prime game after x rounds.
+    """
+    if x <= 0 or not nums:
         return None
 
-    max_n = max(nums)
-    sieve = sieve_of_eratosthenes(max_n)
-    prime_win_counts = [0] * (max_n + 1)
-
-    for i in range(1, max_n + 1):
-        prime_win_counts[i] = prime_win_counts[i - 1]
-        if prime_counts(i, sieve) % 2 != 0:
-            prime_win_counts[i] += 1
-
-    maria_wins = 0
-    ben_wins = 0
-
+    max_num = max(nums)
+    primes = sieve_of_eratosthenes(max_num)
+    wins = {'Maria': 0, 'Ben': 0}
     for n in nums:
-        if prime_win_counts[n] % 2 == 0:
-            ben_wins += 1
-        else:
-            maria_wins += 1
+        primes_up_to_n = [i for i in range(2, n + 1) if primes[i]]
+        if not primes_up_to_n:
+            wins['Ben'] += 1
+            continue
 
-    if maria_wins > ben_wins:
-        return "Maria"
-    elif ben_wins > maria_wins:
-        return "Ben"
+        move_count = 0
+        removed = [False] * (n + 1)
+
+        for prime in primes_up_to_n:
+            if not removed[prime]:
+                move_count += 1
+                for multiple in range(prime, n + 1, prime):
+                    removed[multiple] = True
+        if move_count % 2 == 1:
+            wins['Maria'] += 1
+        else:
+            wins['Ben'] += 1
+    if wins['Maria'] > wins['Ben']:
+        return 'Maria'
+    elif wins['Ben'] > wins['Maria']:
+        return 'Ben'
     else:
         return None
