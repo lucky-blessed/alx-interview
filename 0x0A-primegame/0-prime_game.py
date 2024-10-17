@@ -3,7 +3,10 @@
 
 
 def sieve_of_eratosthenes(n):
-    """Generate a list of prime up to n using the sieve of erastosthenes"""
+    """
+    Generate a list of prime up to n using the sieve of
+    erastosthenes
+    """
     sieve = [True] * (n + 1)
     sieve[0] = sieve[1] = False
     for i in range(2, int(n ** 0.5) + 1):
@@ -14,7 +17,9 @@ def sieve_of_eratosthenes(n):
 
 
 def prime_counts(n, sieve):
-    """Calculate the number of primes up to n"""
+    """
+    Calculate the number of primes up to n
+    """
     return sum(sieve[:n + 1])
 
 
