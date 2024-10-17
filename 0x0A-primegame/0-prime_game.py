@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Prime Game"""
+
 
 def sieve_of_eratosthenes(n):
     """Generate a list of prime up to n using the sieve of erastosthenes"""
