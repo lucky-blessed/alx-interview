@@ -1,43 +1,29 @@
 #!/usr/bin/python3
-"""
-This module provides a function makeChanges to determine
-the minimum number of coins needed to make a
-given amount of change
-
-Concepts:
-    - Greedy Algorithm
-    - Dynamic programming
-    - Algorithic complecity
-"""
+'''Given a pile of coins of different values,
+    determine the fewest number of coins needed to meet
+    a given amount total.
+'''
+import sys
 
 
 def makeChange(coins, total):
-    """
-    To determine the fewest number of coins needed to make
-    a given totaly.
-
-    Args:
-        coins (list of in): A list of the of the value of cons
-        in your possession where each vaue us an integer
-        greater than zero (0).
-        total (int): The total amount to achieve with the
-        fewest number of coins.
-
-    Returns:
-        int: Fewest number of coins needed to make a total.
-        - if the total is 0 or less, return 0
-        - if the total connot be met by any combination of
-          coins, return -1
-    """
-
+    '''
+    Return: fewest number of coins needed to meet total
+    If total is 0 or less, return 0
+    If total cannot be met by any number of coins you have, return -1
+    '''
     if total <= 0:
         return 0
+    table = [sys.maxsize for i in range(total + 1)]
+    table[0] = 0
+    m = len(coins)
+    for i in range(1, total + 1):
+        for j in range(m):
+            if coins[j] <= i:
+                subres = table[i - coins[j]]
+                if subres != sys.maxsize and subres + 1 < table[i]:
+                    table[i] = subres + 1
 
-    dp = [float('inf')] * (total + 1)
-    dp[0] = 0
-
-    for coin in coins:
-        for k in range(coin, total + 1):
-            dp[k] = min(dp[k], dp[k - coin] + 1)
-
-    return dp[total] if dp[total] != float('inf') else -1
+    if table[total] == sys.maxsize:
+        return -1
+    return table[total]
